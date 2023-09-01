@@ -6,14 +6,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
 public class MessageController {
     @Autowired
     SendDataService sendDataService;
+
+    @Autowired
+    private ProjectService projectService;
+
 
     @MessageMapping("/user/{userName}")
     @SendTo("/topic/{userName}")  // will broadcast the message to all subscribed users
@@ -22,10 +28,9 @@ public class MessageController {
             return new ResponseEntity<>(sendDataService.getUserData(userName),HttpStatus.OK);
     }
 
-
-//    @MessageMapping("/user/{id}")
-//    @SendTo("/topic/{id}")
-//    public String sendProj(@DestinationVariable String id) {
-//        return "Hello " + id + " project for you";
-//    }
+    @MessageMapping("/user/newProject/{userName}")
+    @SendTo("/topic/{userName}")
+    public ResponseEntity<Project> newProj(@RequestBody Project project) {
+        return new ResponseEntity<>(projectService.addProject(project), HttpStatus.OK);
+    }
 }

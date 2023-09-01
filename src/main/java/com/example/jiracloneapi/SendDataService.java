@@ -33,13 +33,13 @@ public class SendDataService {
             opProject.ifPresent(userProjects::add);
         }
         SendData data = new SendData(user,userProjects);
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String json = "";
-        try {
-            json = ow.writeValueAsString(data);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+//        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+//        String json = "";
+//        try {
+//            json = ow.writeValueAsString(data);
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
         System.out.println("Data sent");
         return Optional.of(data);
     }
