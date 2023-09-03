@@ -19,5 +19,5 @@ public class Comment {
     private String commentId;
     private User user;
     private String content;
-    private Date createdOn;
+    private String createdOn;
 }

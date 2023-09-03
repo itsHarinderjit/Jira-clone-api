@@ -29,8 +29,8 @@ public class Task {
     private int orgEstTime;
     private int timeSpent;
     private int timeRemaining;
-    private Date createdOn;
-    private Date updatedOn;
+    private String createdOn;
+    private String updatedOn;
     @Reference
     private List<Comment> comments;
 }

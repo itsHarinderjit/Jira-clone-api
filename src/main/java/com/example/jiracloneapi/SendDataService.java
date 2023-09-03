@@ -20,11 +20,14 @@ public class SendDataService {
     public Optional<SendData> getUserData(String userName) throws JsonProcessingException {
         System.out.println("Hello from send data");
         Optional<User> opUser = userService.getUserByUserName(userName);
+        System.out.println(userName);
         User user = null;
         if(opUser.isPresent())
             user = opUser.get();
-        else
+        else {
+            System.out.println("User not found");
             return Optional.empty();
+        }
         List<String> projects = user.getProjects();
         List<Project> userProjects = new ArrayList<>();
         for (String project:projects

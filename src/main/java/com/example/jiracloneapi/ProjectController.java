@@ -19,7 +19,6 @@ public class ProjectController {
     @MessageMapping("/user/project/{id}")
     @SendTo("/topic/project/{id}")
     public ResponseEntity<Project> changeProj(@RequestBody Project project) {
-        System.out.println(project.toString());
         return new ResponseEntity<>(projectService.changeProjectData(project), HttpStatus.OK);
     }
 

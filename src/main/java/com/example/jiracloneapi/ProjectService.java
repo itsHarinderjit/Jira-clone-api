@@ -40,11 +40,6 @@ public class ProjectService {
     }
 
     public Project addProject(Project project) {
-//        for(String userId: project.getUsers()) {
-//            Query query = new Query(Criteria.where("userId").is(userId));
-//            Update update = new Update().push("projects",project.getProjectId());
-//            mongoTemplate.findAndModify(query,update,User.class);
-//        }
         Query query = new Query(Criteria.where("userId").in(project.getUsers()));
         Update update = new Update().push("projects",project.getProjectId());
         mongoTemplate.updateMulti(query,update,User.class);

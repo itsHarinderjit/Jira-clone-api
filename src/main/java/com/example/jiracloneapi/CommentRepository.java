@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface TaskRespository extends MongoRepository<Task,String> {
-
-    Optional<Task> findTaskByTaskId(String taskId);
+public interface CommentRepository extends MongoRepository<Comment,String> {
+    Optional<Comment> findCommentByCommentId(String commentId);
 }
