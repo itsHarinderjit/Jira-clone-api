@@ -36,31 +36,18 @@ public class TaskService {
         return task1;
     }
 
-//    public Task updateTask(Task task) {
-//        System.out.println(task.getTaskId());
-//        Optional<Task> opTask = taskRespository.findTaskByTaskId(task.getTaskId());
-//        Task task1 = null;
-//        System.out.println("Inside update task");
-//        if(opTask.isPresent())
-//            task1 = opTask.get();
-//        else
-//            return new Task();
-//        task.setId(task1.getId());
-//        task.setComments(task1.getComments());
-//        System.out.println("Task id: " + task.getTaskId());
-//        Query query = new Query(Criteria.where("taskId").is(task.getTaskId()));
-//        FindAndReplaceOptions findAndReplaceOptions = new FindAndReplaceOptions().returnNew();
-//        return mongoTemplate.findAndReplace(query,task,findAndReplaceOptions);
-//    }
-
     public void deleteTask(String taskId,String projectId) {
+        System.out.println("Inside deleteTask");
         Query query = new Query(Criteria.where("taskId").is(taskId));
         Optional<Task> opTask = taskRespository.findTaskByTaskId(taskId);
         Task task = null;
         if(opTask.isPresent())
             task = opTask.get();
-        else
+        else {
+            System.out.println("Not found");
             return;
+        }
+        System.out.println("Deleting task");
         mongoTemplate.findAndRemove(query,Task.class);
         query = new Query(Criteria.where("projectId").is(projectId));
         Update update = new Update().pull("tasks",task.getId());
